@@ -42,7 +42,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => 'fail',
                 'message' => $e->getMessage(),
-                
+
             ]);
         }
     }
@@ -60,7 +60,38 @@ class UserController extends Controller
                 'message'=>'Login Created Successfully',
                 'token'=>$token
 
-             ],200)->cookie('tolen',$token,60*24*30);
+             ],200)->cookie('token',$token,60*24*30);
+         }
+         else{
+
+             return response()->json([
+
+                 'status'=>'fail',
+                  'message'=> 'Unauthorized'
+
+            ],401);
          }
     }
+
+    public function DashboardPage(Request $request){
+
+       $user = $request->header('email');
+
+        return response()->json([
+
+             'status'=>'success',
+             'message'=>'User login successfully',
+             'user'=>$user
+        ],200);
+
+    }
+
+    public function Logout(){
+
+         return response()->json([
+            'status'=>'Success',
+             'message'=>'Logout',
+
+         ],200)->cookie('token','',-1);
+     }
 }
