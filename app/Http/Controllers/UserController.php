@@ -23,13 +23,15 @@ class UserController extends Controller
                 'name' => 'required',
                 'email' => 'required|email:unique:users,email',
                 'password' => 'required',
+                'mobile'=>'required'
             ]);
 
             $user = User::create([
 
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
-                'password' => $request->input('password')
+                'password' => $request->input('password'),
+                'mobile'=>$request->input('mobile')
 
             ]);
 
